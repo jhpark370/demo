@@ -27,8 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                // .csrf().disable() 나중에 지워준다.
+                // - .csrf()는 암호화된 키를 발생시켜 해킹을 방지하기 위한 기능을 한다.
+                // 테스트를 원활하게 하기 위해서 일시적으로 disable시킨다.
+                .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/account/register", "/css/**").permitAll()
+                    .antMatchers("/", "/account/register", "/css/**", "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
