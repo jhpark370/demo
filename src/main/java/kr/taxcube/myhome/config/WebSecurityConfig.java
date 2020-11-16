@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 테스트를 원활하게 하기 위해서 일시적으로 disable시킨다.
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/account/register", "/css/**", "/api/**").permitAll()
+                    .antMatchers("/", "/account/register", "/css/**", "/img/**", "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

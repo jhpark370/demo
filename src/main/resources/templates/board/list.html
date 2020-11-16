@@ -41,7 +41,8 @@
         <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/board/list}">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="searchText" class="sr-only">검색</label>
-                <input type="text" class="form-control" id="searchText" name="searchText" th:value="${param.searchText}">
+                <input type="text" class="form-control" id="searchText" name="searchText"
+                    th:value="${param.searchText}">
             </div>
             <button type="submit" class="btn btn-light mb-2">검색</button>
         </form>
@@ -51,13 +52,37 @@
                     <th scope="col">번호</th>
                     <th scope="col">제목</th>
                     <th scope="col">작성자</th>
+                    <!-- 테이블에 들어갈 곳을 만든다. -->
+                    <th scope="col"> </th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="board : ${boards}">
+                <tr th:each="board : ${boards} ">
                     <th th:text="${board.id}">1</th>
                     <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">Mark</a></td>
                     <td th:text="${board.user.username}">홍길동</td>
+                    <td>
+                        <!-- 이미지를 삽입한다. -->
+                        <img th:src="@{/img/mbr_on.jpg}">
+                        <img th:src="@{/img/mbr_off.png}">
+                        <!-- <img src="https://s.pstatic.net/static/www/img/2018/sp_search.svg"> -->
+                        <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-app" fill="green"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11 2H5a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-app" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11 2H5a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-app" fill="red"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M11 2H5a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z" />
+                        </svg> -->
+                        <!-- 이미지를 삽입한다. -->
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -66,7 +91,8 @@
                 <!-- 특정조건일 때 previous 비활성화 -->
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'">
                     <!-- previous 버튼 이동 가능하도록 -->
-                    <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1}, searchText=${param.searchText})}"
+                    <a class="page-link" href="#"
+                        th:href="@{/board/list(page=${boards.pageable.pageNumber - 1}, searchText=${param.searchText})}"
                         tabindex="-1" aria-disabled="true">Previous</a>
                 </li>
                 <!-- 루프를 돌린다. -->
